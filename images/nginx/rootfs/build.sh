@@ -225,7 +225,7 @@ get_src 0fb790e394510e73fdba1492e576aaec0b8ee9ef08e3e821ce253a07719cf7ea \
         "https://github.com/ElvinEfendi/lua-resty-global-throttle/archive/v$LUA_RESTY_GLOBAL_THROTTLE_VERSION.tar.gz"
 
 get_src 5253bb8a804ea679e514137a234637298f044c3ef63c053670bf3802ff3535b1 \
-        "https://github.com/wandenberg/nginx-push-stream-module/archive/refs/tags/$NGINX_PUSH_STREAM_VERSION.tar.gz"
+        "https://github.com/wandenberg/nginx-push-stream-module/archive/$NGINX_PUSH_STREAM_VERSION.tar.gz"
 
 # improve compilation times
 CORES=$(($(grep -c ^processor /proc/cpuinfo) - 1))
