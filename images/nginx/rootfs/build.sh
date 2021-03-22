@@ -17,6 +17,7 @@
 set -o errexit
 set -o nounset
 set -o pipefail
+set -x
 
 export NGINX_VERSION=1.19.6
 export NDK_VERSION=0.3.1
@@ -512,6 +513,7 @@ WITH_MODULES=" \
   --add-module=$BUILD_PATH/stream-lua-nginx-module-$LUA_STREAM_NGX_VERSION \
   --add-module=$BUILD_PATH/lua-upstream-nginx-module-$LUA_UPSTREAM_VERSION \
   --add-module=$BUILD_PATH/nginx_ajp_module-${NGINX_AJP_VERSION} \
+  --add-module=$BUILD_PATH/nginx-push-stream-module-${NGINX_PUSH_STREAM_VERSION} \
   --add-dynamic-module=$BUILD_PATH/nginx-http-auth-digest-$NGINX_DIGEST_AUTH \
   --add-dynamic-module=$BUILD_PATH/nginx-influxdb-module-$NGINX_INFLUXDB_VERSION \
   --add-dynamic-module=$BUILD_PATH/nginx-opentracing-$NGINX_OPENTRACING_VERSION/opentracing \
@@ -546,6 +548,11 @@ WITH_MODULES=" \
 
 make
 make modules
+make install
+
+ls -l $BUILD_PATH
+
+cd "$BUILD_PATH/nginx-push-stream-module-$NGINX_PUSH_STREAM_VERSION"
 make install
 
 cd "$BUILD_PATH/lua-resty-core-$LUA_RESTY_CORE"
@@ -597,8 +604,7 @@ INST_LUADIR=/usr/local/lib/lua make install
 cd "$BUILD_PATH/lua-resty-global-throttle-$LUA_RESTY_GLOBAL_THROTTLE_VERSION"
 make install
 
-cd "$BUILD_PATH/nginx-push-stream-module-$NGINX_PUSH_STREAM_VERSION"
-make install
+
 
 # mimalloc
 cd "$BUILD_PATH"
