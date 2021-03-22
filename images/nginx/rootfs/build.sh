@@ -553,6 +553,7 @@ make install
 ls -l $BUILD_PATH
 
 cd "$BUILD_PATH/nginx-push-stream-module-$NGINX_PUSH_STREAM_VERSION"
+make
 make install
 
 cd "$BUILD_PATH/lua-resty-core-$LUA_RESTY_CORE"
