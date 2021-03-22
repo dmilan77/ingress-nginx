@@ -56,6 +56,7 @@ export LUA_RESTY_MEMCACHED_VERSION=0.15
 export LUA_RESTY_REDIS_VERSION=0.29
 export LUA_RESTY_IPMATCHER_VERSION=1a0a1c58fd085b15eedee58de8b5f45c27aff7bc
 export LUA_RESTY_GLOBAL_THROTTLE_VERSION=0.2.0
+export NGINX_PUSH_STREAM_VERSION=0.5.4
 
 export BUILD_PATH=/tmp/build
 
@@ -221,6 +222,9 @@ get_src d0eacda122ab36585936256cb222ea9147bc5ad1fc3f24fd3748475653dd27ad \
 
 get_src 0fb790e394510e73fdba1492e576aaec0b8ee9ef08e3e821ce253a07719cf7ea \
         "https://github.com/ElvinEfendi/lua-resty-global-throttle/archive/v$LUA_RESTY_GLOBAL_THROTTLE_VERSION.tar.gz"
+
+get_src 5253bb8a804ea679e514137a234637298f044c3ef63c053670bf3802ff3535b1 \
+        "https://github.com/wandenberg/nginx-push-stream-module/archive/refs/tags/$NGINX_PUSH_STREAM_VERSION.tar.gz"
 
 # improve compilation times
 CORES=$(($(grep -c ^processor /proc/cpuinfo) - 1))
@@ -591,6 +595,9 @@ cd "$BUILD_PATH/lua-resty-ipmatcher-$LUA_RESTY_IPMATCHER_VERSION"
 INST_LUADIR=/usr/local/lib/lua make install
 
 cd "$BUILD_PATH/lua-resty-global-throttle-$LUA_RESTY_GLOBAL_THROTTLE_VERSION"
+make install
+
+cd "$BUILD_PATH/nginx-push-stream-module-$NGINX_PUSH_STREAM_VERSION"
 make install
 
 # mimalloc
